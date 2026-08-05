@@ -381,7 +381,7 @@ git commit -m "docs: add bilingual package guide"
 
 - [ ] **Step 2: Adopt the Contributor Covenant without inventing custom conduct rules**
 
-Use Contributor Covenant 2.1 text and its official enforcement contact mechanism via repository maintainer/private reporting, without exposing a personal email.
+Adopt Contributor Covenant 2.1 by authoritative link and apply its complete pledge, standards, scope and enforcement guidelines. Provide GitHub private reporting as the confidential contact method without copying a private email into the repository.
 
 - [ ] **Step 3: Seed the changelog**
 

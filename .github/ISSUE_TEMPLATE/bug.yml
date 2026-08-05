@@ -1,0 +1,69 @@
+name: Bug report
+description: Report a reproducible correctness, lifecycle, or compatibility problem.
+title: '[Bug]: '
+labels: [bug, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include access tokens, cookies, private endpoints, or personal data. Security problems belong in GitHub private vulnerability reporting.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Preflight checks
+      options:
+        - label: I searched existing Issues for the same behavior.
+          required: true
+        - label: I removed credentials and personal data from the report.
+          required: true
+  - type: input
+    id: package-version
+    attributes:
+      label: Package version or commit
+      placeholder: 0.1.0 or a full commit SHA
+    validations:
+      required: true
+  - type: input
+    id: react-native-version
+    attributes:
+      label: React Native and Expo versions
+      placeholder: React Native 0.86.2, Expo SDK 57.0.0
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options:
+        - iOS
+        - Android
+        - Both
+    validations:
+      required: true
+  - type: input
+    id: runtime
+    attributes:
+      label: OS, device, and JavaScript engine
+      placeholder: iOS 26.5 simulator, iPhone 17 Pro, Hermes
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: Provide a public repository, Snack, or minimal code and deterministic server behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior and logs
+      description: Explain whether the problem reproduces every time. Redact sensitive values.
+    validations:
+      required: true
