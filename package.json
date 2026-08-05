@@ -48,16 +48,19 @@
     "build": "tsup src/index.ts --format cjs,esm --dts --clean",
     "benchmark": "node --expose-gc --import tsx benchmarks/parser.bench.ts",
     "benchmark:ci": "BENCHMARK_OUTPUT=benchmark-results/node-v8.json npm run benchmark",
+    "changeset": "changeset",
     "check": "npm run format:check && npm run lint && npm run typecheck && npm run test:coverage && npm run audit:production && npm run build && npm run package:check",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
     "lint": "eslint . --max-warnings=0",
     "package:check": "publint && attw --pack .",
     "prepublishOnly": "npm run check",
+    "release": "changeset publish",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "version": "changeset version"
   },
   "peerDependencies": {
     "react": ">=17",
@@ -65,6 +68,7 @@
   },
   "devDependencies": {
     "@arethetypeswrong/cli": "^0.18.5",
+    "@changesets/cli": "^2.31.1",
     "@eslint/js": "^10.0.1",
     "@types/node": "^26.1.2",
     "@types/react": "^19.1.9",
