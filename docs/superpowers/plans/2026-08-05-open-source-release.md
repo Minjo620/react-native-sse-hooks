@@ -88,6 +88,7 @@ Expected: `main` points at the verified baseline and work continues on `chore/op
 - Create: `.node-version`
 - Modify: `package.json`
 - Modify: `package-lock.json`
+- Modify: `LICENSE`
 - Modify: `.github/workflows/ci.yml`
 
 **Interfaces:**
@@ -123,6 +124,8 @@ Update `package.json` with:
 ```
 
 Do not add a restrictive `engines.node` field: Node is the build/test tool here, while consumers execute the package in React Native. Exact contributor tooling is enforced by the marker files, `packageManager`, and CI.
+
+Update the MIT copyright line to `Copyright (c) 2026 minjo` without adding an email address.
 
 - [ ] **Step 3: Regenerate package-lock metadata with the pinned npm version**
 
