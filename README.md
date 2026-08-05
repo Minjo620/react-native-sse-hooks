@@ -1,28 +1,45 @@
 # React Native SSE Hooks
 
-An experimental, React Native-aware Server-Sent Events hook with incremental parsing, deterministic listener setup, AppState recovery, and controllable retries.
+English | [简体中文](./README.zh-CN.md)
 
-> Local development preview. This package has not been published yet.
+A Hook-first Server-Sent Events client for React Native with incremental parsing, explicit connection ownership, AppState recovery, and controllable retry policy.
 
-## Why
+## Why this package
 
-- No artificial `timeoutBeforeConnection`: callbacks exist before the request starts.
-- Incremental parsing for React Native's cumulative `XMLHttpRequest.responseText`.
-- Pauses in `background`/`inactive` and resumes with `Last-Event-ID` by default.
-- Guards every XHR attempt so stale callbacks cannot affect a newer connection.
-- Preserves SSE whitespace and handles LF, CR, CRLF, comments, IDs, event names, and retry fields.
-- Uses APIs available from React 17 and adapts both modern and legacy React Native AppState cleanup.
+- Starts the request only after XHR callbacks and parser ownership are established; it adds no artificial initial connection delay.
+- Processes only the new suffix of React Native's cumulative `XMLHttpRequest.responseText`.
+- Parses LF, CR, CRLF, comments, BOM, multi-line data, event names, IDs, and retry fields independently of chunk boundaries.
+- Pauses on `background`/`inactive` and resumes with transport-managed `Last-Event-ID` by default.
+- Retires stale XHR generations so callbacks from an older attempt cannot mutate the current connection.
+- Exposes stable `open`, `close`, and `reconnect` commands for applications that need manual ownership.
+- Ships CJS, ESM, React Native conditional exports, and TypeScript declarations with no runtime dependencies.
 
-## Usage
+## Installation
+
+```bash
+npm install react-native-sse-hooks
+```
+
+Peer requirements:
+
+```text
+react >= 17
+react-native >= 0.64
+```
+
+This package is implemented in JavaScript/TypeScript and does not add an iOS or Android native module.
+
+## Quick start
 
 ```tsx
+import { Text } from 'react-native';
 import { useEventSource } from 'react-native-sse-hooks';
 
-function Updates() {
-  const source = useEventSource('https://example.com/events', {
-    headers: { Authorization: 'Bearer token' },
+export function Updates() {
+  const source = useEventSource<'token'>('https://example.com/events', {
+    headers: { Authorization: 'Bearer example-token' },
     onMessage(message) {
-      console.log(message.event, message.data);
+      console.log(message.event, message.id, message.data);
     },
     onError(error) {
       if (error.status === 401) return false;
@@ -30,30 +47,106 @@ function Updates() {
     },
   });
 
-  // source.status, source.open(), source.close(), source.reconnect()
-  return null;
+  return <Text>{source.status}</Text>;
 }
 ```
 
-The default `openWhenBackground: false` means that the active XHR is aborted when React Native leaves the foreground and recreated when it becomes active. The hook preserves `Last-Event-ID` across that replacement. Changing headers or timeout policy also preserves the ID; changing the URL, method, or body starts a new resume scope.
+## Lifecycle ownership
 
-`Last-Event-ID` is owned by the transport and must not be supplied through `headers`; this prevents the request cursor from diverging from the parser's committed cursor.
+By default, `enabled` is `true` and `openWhenBackground` is `false`:
 
-Set `enabled: false` when the application should own startup and reconnection. `open()`, `close()`, and `reconnect()` remain stable, and `status` continues to report the real manually controlled connection state. This is the safer mode when replaying a non-idempotent POST stream requires business-level coordination.
+- The Hook opens after its Effect owns one transport and one AppState listener.
+- Leaving the foreground aborts the active XHR or retry timer.
+- Returning to `active` creates a new XHR with the last committed event ID.
+- Unmount, Strict Mode replay, and semantic option changes retire owned resources synchronously.
 
-## Failure and retry policy
+Set `enabled: false` when application logic must decide when a connection can start or replay:
 
-- HTTP `200` opens an SSE stream. HTTP `204` closes with `reason: 'no-content'` and stops by default.
-- Network errors, timeouts, HTTP `408`, `429`, and `5xx` responses retry by default. Other HTTP and protocol failures stop.
-- Returning `false` from `onError` or `onClose` stops. Returning a finite non-negative number overrides the retry delay.
-- A valid server `retry` field remains active across successful reconnections for the lifetime of the logical stream.
-- `onClose` observes a normal server EOF. Manual close, background pause, and explicit reconnect are commands, not server-close events.
-- Exceptions thrown by `onOpen` or `onMessage` propagate as consumer errors without being relabeled as parser failures. Throwing from `onClose` preserves the default close policy before propagating; throwing from `onError` stops retrying.
+```tsx
+const source = useEventSource(url, {
+  enabled: false,
+  method: 'POST',
+  body: JSON.stringify(payload),
+  onMessage,
+});
 
-## Local verification
+source.open();
+source.reconnect();
+source.close();
+```
 
-```sh
-npm install
+The command functions are stable. `status` still reports the real lifecycle in manual mode.
+
+## Request and retry policy
+
+```ts
+interface UseEventSourceOptions<EventName extends string = string> {
+  method?: string; // default: GET
+  headers?: Record<string, string>;
+  body?: string;
+  withCredentials?: boolean; // default: false
+  timeout?: number; // default: 0, no XHR timeout
+  enabled?: boolean; // default: true
+  openWhenBackground?: boolean; // default: false
+  retryInterval?: number; // default: 1000 ms
+  onOpen?: (event: EventSourceOpenEvent) => void;
+  onMessage?: (message: EventSourceMessage<EventName>) => void;
+  onClose?: (event: EventSourceCloseEvent) => number | false | undefined;
+  onError?: (error: EventSourceError) => number | false | undefined;
+}
+```
+
+- HTTP `200` with `text/event-stream` opens the stream.
+- HTTP `204` closes with `reason: 'no-content'` and stops by default.
+- Network errors, timeouts, HTTP `408`, `429`, and `5xx` retry by default.
+- Other HTTP failures and protocol failures stop by default.
+- Returning `false` from `onClose`/`onError` stops retrying.
+- Returning a finite non-negative number overrides the next retry delay.
+- A valid server `retry` field updates the default delay for the logical stream.
+
+`Last-Event-ID` is owned by the transport and must not be supplied in `headers`. This prevents an application header from diverging from the parser's last committed cursor.
+
+## Relationship to `react-native-sse`
+
+[`react-native-sse`](https://github.com/binaryminds/react-native-sse) is an established EventSource-style implementation used as this project's comparison baseline. This package focuses on a Hook-owned lifecycle and a separately testable incremental parser.
+
+One directly observable configuration difference is initial scheduling: `react-native-sse@1.2.1` documents `timeoutBeforeConnection: 500` as its default, while this package installs its callbacks before opening XHR and adds no corresponding wait. This removes an artificial scheduling delay; it does **not** mean the native network handshake itself becomes 500 ms faster.
+
+## Measured results
+
+Retained Expo/Hermes production-bundle results below compare processing with `react-native-sse@1.2.1` explicitly configured to a 0 ms initial delay.
+
+| Workload        | Processing throughput | End-to-end total time |
+| --------------- | --------------------: | --------------------: |
+| LLM delta       |                +7.46% |               +36.08% |
+| Tiny chunks     |                +5.13% |               +24.11% |
+| Normal stream   |               +22.01% |               +34.58% |
+| Large events    |                +9.89% |               +12.15% |
+| High throughput |               +14.13% |               +19.21% |
+
+Environment: iPhone 17 Pro simulator, iOS 26.5, Expo SDK 57.0.0, React Native 0.86.2, Hermes, Expo Go, production `--no-dev --minify` bundle. Three suites contained 234 connections and 189 measured connections; all event counts, ordering checks, and hashes passed.
+
+The retained Node 24.18.0/V8 parser microbenchmark improved four workloads, while `normal-stream` measured approximately 1%–2% slower by median (0.154 ms in the fresh retained run). These results are workload- and runtime-specific, not universal performance promises.
+
+Read the [methodology](./docs/benchmarks/README.md), [full results](./docs/benchmarks/2026-08-05-results.md), and [raw evidence](./docs/benchmarks/data/2026-08-05/).
+
+## Protocol and compatibility limits
+
+- Parsing follows the relevant event-stream rules in the [WHATWG HTML Living Standard](https://html.spec.whatwg.org/multipage/server-sent-events.html), but this package is not a browser `EventSource` polyfill.
+- Requests use the React Native `XMLHttpRequest` subset and therefore follow platform networking behavior.
+- POST stream replay can be non-idempotent; use manual mode when business coordination is required.
+- Simulator and Node benchmarks do not establish physical-device networking, energy, thermal, or large-user-scale behavior.
+
+## Development
+
+```bash
+npm ci
 npm run check
 npm run benchmark
 ```
+
+See [CONTRIBUTING.md](./CONTRIBUTING.md) before opening a pull request. Report vulnerabilities through the private process in [SECURITY.md](./SECURITY.md), not through a public Issue.
+
+## License
+
+[MIT](./LICENSE) © 2026 minjo
