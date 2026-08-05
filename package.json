@@ -1,0 +1,85 @@
+{
+  "name": "react-native-sse-hooks",
+  "version": "0.1.0",
+  "description": "Resilient, React Native-aware Server-Sent Events hooks.",
+  "license": "MIT",
+  "type": "commonjs",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "react-native": "dist/index.mjs",
+  "exports": {
+    ".": {
+      "react-native": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "default": "./dist/index.mjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "audit:production": "npm audit --omit=dev --audit-level=low",
+    "build": "tsup src/index.ts --format cjs,esm --dts --clean",
+    "benchmark": "node --expose-gc --import tsx benchmarks/parser.bench.ts",
+    "check": "npm run format:check && npm run lint && npm run typecheck && npm run test:coverage && npm run audit:production && npm run build && npm run package:check",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint": "eslint . --max-warnings=0",
+    "package:check": "publint && attw --pack .",
+    "prepublishOnly": "npm run check",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "react": ">=17",
+    "react-native": ">=0.64"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^26.1.2",
+    "@types/react": "^19.1.9",
+    "@types/react-test-renderer": "^19.1.0",
+    "@vitest/coverage-v8": "^4.1.10",
+    "eslint": "^10.8.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.8.0",
+    "prettier": "^3.9.6",
+    "publint": "^0.3.22",
+    "react": "^19.1.1",
+    "react-native": "^0.80.2",
+    "react-native-sse": "^1.2.1",
+    "react-test-renderer": "^19.1.1",
+    "tsup": "^8.5.0",
+    "tsx": "^4.23.1",
+    "typescript": "^5.9.2",
+    "typescript-eslint": "^8.65.0",
+    "vitest": "^4.1.10"
+  },
+  "keywords": [
+    "react-native",
+    "sse",
+    "server-sent-events",
+    "eventsource",
+    "hooks",
+    "streaming"
+  ]
+}

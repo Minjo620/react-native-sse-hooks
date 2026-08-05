@@ -1,0 +1,4 @@
+interface:
+  display_name: 'React Native SSE Hooks'
+  short_description: 'Build and review resilient functional SSE hooks'
+  default_prompt: 'Use $react-native-sse-hooks to implement or review this SSE hook change against the repository lifecycle, parser, and quality rules.'
