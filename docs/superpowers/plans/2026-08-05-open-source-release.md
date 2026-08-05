@@ -207,6 +207,7 @@ git commit -m "ci: align local and hosted runtimes"
 - Create: `docs/benchmarks/data/2026-08-05/simulator-prod-suite-2.json`
 - Create: `docs/benchmarks/data/2026-08-05/simulator-prod-suite-3.json`
 - Modify: `benchmarks/README.md`
+- Modify: `.prettierignore`
 
 **Interfaces:**
 
@@ -216,6 +217,8 @@ git commit -m "ci: align local and hosted runtimes"
 - [ ] **Step 1: Copy only final retained evidence**
 
 Copy the final Node report, all three retained Round 2 Node suites, retained Round 2 aggregate, and all three retained production simulator suites into the paths above. Do not publish rejected Round 3 data as current results; describe it in prose as a rejected experiment.
+
+Exclude `docs/benchmarks/data/` from Prettier so archived JSON remains byte-for-byte identical to its source evidence.
 
 - [ ] **Step 2: Document the Node/V8 method in both languages**
 

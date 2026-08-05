@@ -1,0 +1,1497 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-08-05T03:47:32.279Z",
+  "environment": {
+    "platform": "ios",
+    "platformVersion": "26.5",
+    "deviceName": "Simulator iOS",
+    "isDevice": false,
+    "expoSdk": "57.0.0",
+    "reactNative": {
+      "major": 0,
+      "minor": 86,
+      "patch": 2
+    },
+    "developmentBundle": false
+  },
+  "settings": {
+    "warmupRounds": 1,
+    "measuredRounds": {
+      "llm-delta": 5,
+      "tiny-chunks": 5,
+      "normal-stream": 5,
+      "large-events": 3,
+      "high-throughput": 3
+    }
+  },
+  "workloads": [
+    {
+      "name": "llm-delta",
+      "eventCount": 500,
+      "payloadSize": 24,
+      "variablePayload": true,
+      "chunkSize": 128
+    },
+    {
+      "name": "tiny-chunks",
+      "eventCount": 200,
+      "payloadSize": 32,
+      "variablePayload": false,
+      "chunkSize": 8
+    },
+    {
+      "name": "normal-stream",
+      "eventCount": 2000,
+      "payloadSize": 64,
+      "variablePayload": true,
+      "chunkSize": 256
+    },
+    {
+      "name": "large-events",
+      "eventCount": 64,
+      "payloadSize": 65536,
+      "variablePayload": false,
+      "chunkSize": 4096
+    },
+    {
+      "name": "high-throughput",
+      "eventCount": 20000,
+      "payloadSize": 48,
+      "variablePayload": false,
+      "chunkSize": 16384
+    }
+  ],
+  "runs": [
+    {
+      "implementation": "baseline-default",
+      "workload": "llm-delta",
+      "warmup": true,
+      "correct": true,
+      "count": 500,
+      "sequenceErrors": 0,
+      "hash": 183997462,
+      "openMs": 542.6823340058327,
+      "firstEventMs": 544.0533339977264,
+      "totalMs": 560.7197920084,
+      "runIndex": 0
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "llm-delta",
+      "warmup": true,
+      "correct": true,
+      "count": 500,
+      "sequenceErrors": 0,
+      "hash": 183997462,
+      "openMs": 18.377583026885986,
+      "firstEventMs": 18.408915996551514,
+      "totalMs": 37.45454102754593,
+      "runIndex": 0
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "llm-delta",
+      "warmup": true,
+      "correct": true,
+      "count": 500,
+      "sequenceErrors": 0,
+      "hash": 183997462,
+      "openMs": 14.328500032424927,
+      "firstEventMs": 14.639333009719849,
+      "totalMs": 29.043166995048523,
+      "runIndex": 0
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "llm-delta",
+      "warmup": false,
+      "correct": true,
+      "count": 500,
+      "sequenceErrors": 0,
+      "hash": 183997462,
+      "openMs": 19.455915987491608,
+      "firstEventMs": 19.472666025161743,
+      "totalMs": 35.07737499475479,
+      "runIndex": 1
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "llm-delta",
+      "warmup": false,
+      "correct": true,
+      "count": 500,
+      "sequenceErrors": 0,
+      "hash": 183997462,
+      "openMs": 3.922708034515381,
+      "firstEventMs": 3.9244580268859863,
+      "totalMs": 18.559583008289337,
+      "runIndex": 1
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "llm-delta",
+      "warmup": false,
+      "correct": true,
+      "count": 500,
+      "sequenceErrors": 0,
+      "hash": 183997462,
+      "openMs": 521.7160410284996,
+      "firstEventMs": 521.7789580225945,
+      "totalMs": 539.8711250424385,
+      "runIndex": 1
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "llm-delta",
+      "warmup": false,
+      "correct": true,
+      "count": 500,
+      "sequenceErrors": 0,
+      "hash": 183997462,
+      "openMs": 8.156958997249603,
+      "firstEventMs": 8.164375007152557,
+      "totalMs": 25.573666989803314,
+      "runIndex": 2
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "llm-delta",
+      "warmup": false,
+      "correct": true,
+      "count": 500,
+      "sequenceErrors": 0,
+      "hash": 183997462,
+      "openMs": 521.5516669750214,
+      "firstEventMs": 521.6204590201378,
+      "totalMs": 540.0422499775887,
+      "runIndex": 2
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "llm-delta",
+      "warmup": false,
+      "correct": true,
+      "count": 500,
+      "sequenceErrors": 0,
+      "hash": 183997462,
+      "openMs": 19.508624970912933,
+      "firstEventMs": 19.580666959285736,
+      "totalMs": 37.80816698074341,
+      "runIndex": 2
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "llm-delta",
+      "warmup": false,
+      "correct": true,
+      "count": 500,
+      "sequenceErrors": 0,
+      "hash": 183997462,
+      "openMs": 523.3415420055389,
+      "firstEventMs": 523.3953750133514,
+      "totalMs": 541.1035000085831,
+      "runIndex": 3
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "llm-delta",
+      "warmup": false,
+      "correct": true,
+      "count": 500,
+      "sequenceErrors": 0,
+      "hash": 183997462,
+      "openMs": 19.954792022705078,
+      "firstEventMs": 19.998791992664337,
+      "totalMs": 32.39120799303055,
+      "runIndex": 3
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "llm-delta",
+      "warmup": false,
+      "correct": true,
+      "count": 500,
+      "sequenceErrors": 0,
+      "hash": 183997462,
+      "openMs": 2.7268750071525574,
+      "firstEventMs": 2.7297500371932983,
+      "totalMs": 17.363250017166138,
+      "runIndex": 3
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "llm-delta",
+      "warmup": false,
+      "correct": true,
+      "count": 500,
+      "sequenceErrors": 0,
+      "hash": 183997462,
+      "openMs": 17.52224999666214,
+      "firstEventMs": 17.5575829744339,
+      "totalMs": 29.136540949344635,
+      "runIndex": 4
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "llm-delta",
+      "warmup": false,
+      "correct": true,
+      "count": 500,
+      "sequenceErrors": 0,
+      "hash": 183997462,
+      "openMs": 6.533500015735626,
+      "firstEventMs": 6.537625014781952,
+      "totalMs": 19.758083999156952,
+      "runIndex": 4
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "llm-delta",
+      "warmup": false,
+      "correct": true,
+      "count": 500,
+      "sequenceErrors": 0,
+      "hash": 183997462,
+      "openMs": 523.9487090110779,
+      "firstEventMs": 524.0174590349197,
+      "totalMs": 541.980084002018,
+      "runIndex": 4
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "llm-delta",
+      "warmup": false,
+      "correct": true,
+      "count": 500,
+      "sequenceErrors": 0,
+      "hash": 183997462,
+      "openMs": 8.111707985401154,
+      "firstEventMs": 8.117208003997803,
+      "totalMs": 26.127749979496002,
+      "runIndex": 5
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "llm-delta",
+      "warmup": false,
+      "correct": true,
+      "count": 500,
+      "sequenceErrors": 0,
+      "hash": 183997462,
+      "openMs": 521.1248750090599,
+      "firstEventMs": 521.166041970253,
+      "totalMs": 535.2207089662552,
+      "runIndex": 5
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "llm-delta",
+      "warmup": false,
+      "correct": true,
+      "count": 500,
+      "sequenceErrors": 0,
+      "hash": 183997462,
+      "openMs": 22.771540999412537,
+      "firstEventMs": 22.831915974617004,
+      "totalMs": 39.272791028022766,
+      "runIndex": 5
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "tiny-chunks",
+      "warmup": true,
+      "correct": true,
+      "count": 200,
+      "sequenceErrors": 0,
+      "hash": 1882083013,
+      "openMs": 519.375,
+      "firstEventMs": 519.657792031765,
+      "totalMs": 584.4062920212746,
+      "runIndex": 0
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "tiny-chunks",
+      "warmup": true,
+      "correct": true,
+      "count": 200,
+      "sequenceErrors": 0,
+      "hash": 1882083013,
+      "openMs": 16.65404099225998,
+      "firstEventMs": 16.860166013240814,
+      "totalMs": 70.766665995121,
+      "runIndex": 0
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "tiny-chunks",
+      "warmup": true,
+      "correct": true,
+      "count": 200,
+      "sequenceErrors": 0,
+      "hash": 1882083013,
+      "openMs": 2.0402080416679382,
+      "firstEventMs": 2.3541250228881836,
+      "totalMs": 50.68179202079773,
+      "runIndex": 0
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "tiny-chunks",
+      "warmup": false,
+      "correct": true,
+      "count": 200,
+      "sequenceErrors": 0,
+      "hash": 1882083013,
+      "openMs": 16.774583995342255,
+      "firstEventMs": 16.905417025089264,
+      "totalMs": 69.35029202699661,
+      "runIndex": 1
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "tiny-chunks",
+      "warmup": false,
+      "correct": true,
+      "count": 200,
+      "sequenceErrors": 0,
+      "hash": 1882083013,
+      "openMs": 2.23137503862381,
+      "firstEventMs": 2.5556670427322388,
+      "totalMs": 55.54729199409485,
+      "runIndex": 1
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "tiny-chunks",
+      "warmup": false,
+      "correct": true,
+      "count": 200,
+      "sequenceErrors": 0,
+      "hash": 1882083013,
+      "openMs": 521.7852500081062,
+      "firstEventMs": 521.964958012104,
+      "totalMs": 583.2007499933243,
+      "runIndex": 1
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "tiny-chunks",
+      "warmup": false,
+      "correct": true,
+      "count": 200,
+      "sequenceErrors": 0,
+      "hash": 1882083013,
+      "openMs": 3.490499973297119,
+      "firstEventMs": 3.5951249599456787,
+      "totalMs": 58.27799999713898,
+      "runIndex": 2
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "tiny-chunks",
+      "warmup": false,
+      "correct": true,
+      "count": 200,
+      "sequenceErrors": 0,
+      "hash": 1882083013,
+      "openMs": 519.256333053112,
+      "firstEventMs": 519.4034579992294,
+      "totalMs": 572.186292052269,
+      "runIndex": 2
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "tiny-chunks",
+      "warmup": false,
+      "correct": true,
+      "count": 200,
+      "sequenceErrors": 0,
+      "hash": 1882083013,
+      "openMs": 19.05204200744629,
+      "firstEventMs": 19.148249983787537,
+      "totalMs": 76.00970900058746,
+      "runIndex": 2
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "tiny-chunks",
+      "warmup": false,
+      "correct": true,
+      "count": 200,
+      "sequenceErrors": 0,
+      "hash": 1882083013,
+      "openMs": 519.3903339505196,
+      "firstEventMs": 519.70329195261,
+      "totalMs": 581.7081669569016,
+      "runIndex": 3
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "tiny-chunks",
+      "warmup": false,
+      "correct": true,
+      "count": 200,
+      "sequenceErrors": 0,
+      "hash": 1882083013,
+      "openMs": 18.210749983787537,
+      "firstEventMs": 18.440750002861023,
+      "totalMs": 74.5329999923706,
+      "runIndex": 3
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "tiny-chunks",
+      "warmup": false,
+      "correct": true,
+      "count": 200,
+      "sequenceErrors": 0,
+      "hash": 1882083013,
+      "openMs": 3.152750015258789,
+      "firstEventMs": 3.246625006198883,
+      "totalMs": 56.63166701793671,
+      "runIndex": 3
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "tiny-chunks",
+      "warmup": false,
+      "correct": true,
+      "count": 200,
+      "sequenceErrors": 0,
+      "hash": 1882083013,
+      "openMs": 18.28412503004074,
+      "firstEventMs": 18.393625020980835,
+      "totalMs": 73.997250020504,
+      "runIndex": 4
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "tiny-chunks",
+      "warmup": false,
+      "correct": true,
+      "count": 200,
+      "sequenceErrors": 0,
+      "hash": 1882083013,
+      "openMs": 3.033999979496002,
+      "firstEventMs": 3.5524579882621765,
+      "totalMs": 56.381791949272156,
+      "runIndex": 4
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "tiny-chunks",
+      "warmup": false,
+      "correct": true,
+      "count": 200,
+      "sequenceErrors": 0,
+      "hash": 1882083013,
+      "openMs": 518.1089159846306,
+      "firstEventMs": 518.3388329744339,
+      "totalMs": 579.0267909765244,
+      "runIndex": 4
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "tiny-chunks",
+      "warmup": false,
+      "correct": true,
+      "count": 200,
+      "sequenceErrors": 0,
+      "hash": 1882083013,
+      "openMs": 3.2500829696655273,
+      "firstEventMs": 3.799291968345642,
+      "totalMs": 57.74737495183945,
+      "runIndex": 5
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "tiny-chunks",
+      "warmup": false,
+      "correct": true,
+      "count": 200,
+      "sequenceErrors": 0,
+      "hash": 1882083013,
+      "openMs": 516.142332971096,
+      "firstEventMs": 516.463957965374,
+      "totalMs": 573.6637079715729,
+      "runIndex": 5
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "tiny-chunks",
+      "warmup": false,
+      "correct": true,
+      "count": 200,
+      "sequenceErrors": 0,
+      "hash": 1882083013,
+      "openMs": 18.593374967575073,
+      "firstEventMs": 18.7138329744339,
+      "totalMs": 75.11549997329712,
+      "runIndex": 5
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "normal-stream",
+      "warmup": true,
+      "correct": true,
+      "count": 2000,
+      "sequenceErrors": 0,
+      "hash": 1075217352,
+      "openMs": 524.6269170045853,
+      "firstEventMs": 524.6733750104904,
+      "totalMs": 575.286584019661,
+      "runIndex": 0
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "normal-stream",
+      "warmup": true,
+      "correct": true,
+      "count": 2000,
+      "sequenceErrors": 0,
+      "hash": 1075217352,
+      "openMs": 24.31708300113678,
+      "firstEventMs": 24.355417013168335,
+      "totalMs": 71.5173749923706,
+      "runIndex": 0
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "normal-stream",
+      "warmup": true,
+      "correct": true,
+      "count": 2000,
+      "sequenceErrors": 0,
+      "hash": 1075217352,
+      "openMs": 9.034165978431702,
+      "firstEventMs": 9.037916004657745,
+      "totalMs": 48.01179099082947,
+      "runIndex": 0
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "normal-stream",
+      "warmup": false,
+      "correct": true,
+      "count": 2000,
+      "sequenceErrors": 0,
+      "hash": 1075217352,
+      "openMs": 21.307916045188904,
+      "firstEventMs": 21.353790998458862,
+      "totalMs": 67.93233299255371,
+      "runIndex": 1
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "normal-stream",
+      "warmup": false,
+      "correct": true,
+      "count": 2000,
+      "sequenceErrors": 0,
+      "hash": 1075217352,
+      "openMs": 8.962499976158142,
+      "firstEventMs": 8.966250002384186,
+      "totalMs": 47.68758296966553,
+      "runIndex": 1
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "normal-stream",
+      "warmup": false,
+      "correct": true,
+      "count": 2000,
+      "sequenceErrors": 0,
+      "hash": 1075217352,
+      "openMs": 523.9808750152588,
+      "firstEventMs": 524.0302500128746,
+      "totalMs": 574.4490000009537,
+      "runIndex": 1
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "normal-stream",
+      "warmup": false,
+      "correct": true,
+      "count": 2000,
+      "sequenceErrors": 0,
+      "hash": 1075217352,
+      "openMs": 12.863999962806702,
+      "firstEventMs": 12.867707967758179,
+      "totalMs": 51.22037494182587,
+      "runIndex": 2
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "normal-stream",
+      "warmup": false,
+      "correct": true,
+      "count": 2000,
+      "sequenceErrors": 0,
+      "hash": 1075217352,
+      "openMs": 523.7133330106735,
+      "firstEventMs": 523.7590000033379,
+      "totalMs": 573.8617910146713,
+      "runIndex": 2
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "normal-stream",
+      "warmup": false,
+      "correct": true,
+      "count": 2000,
+      "sequenceErrors": 0,
+      "hash": 1075217352,
+      "openMs": 23.463625013828278,
+      "firstEventMs": 23.494207978248596,
+      "totalMs": 71.90658301115036,
+      "runIndex": 2
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "normal-stream",
+      "warmup": false,
+      "correct": true,
+      "count": 2000,
+      "sequenceErrors": 0,
+      "hash": 1075217352,
+      "openMs": 525.3348749876022,
+      "firstEventMs": 525.3758330345154,
+      "totalMs": 575.5080830454826,
+      "runIndex": 3
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "normal-stream",
+      "warmup": false,
+      "correct": true,
+      "count": 2000,
+      "sequenceErrors": 0,
+      "hash": 1075217352,
+      "openMs": 22.38258296251297,
+      "firstEventMs": 22.417207956314087,
+      "totalMs": 70.24245798587799,
+      "runIndex": 3
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "normal-stream",
+      "warmup": false,
+      "correct": true,
+      "count": 2000,
+      "sequenceErrors": 0,
+      "hash": 1075217352,
+      "openMs": 8.187250018119812,
+      "firstEventMs": 8.191334009170532,
+      "totalMs": 46.796083986759186,
+      "runIndex": 3
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "normal-stream",
+      "warmup": false,
+      "correct": true,
+      "count": 2000,
+      "sequenceErrors": 0,
+      "hash": 1075217352,
+      "openMs": 23.792500019073486,
+      "firstEventMs": 23.835749983787537,
+      "totalMs": 70.87062501907349,
+      "runIndex": 4
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "normal-stream",
+      "warmup": false,
+      "correct": true,
+      "count": 2000,
+      "sequenceErrors": 0,
+      "hash": 1075217352,
+      "openMs": 7.911207973957062,
+      "firstEventMs": 7.915499985218048,
+      "totalMs": 46.208374977111816,
+      "runIndex": 4
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "normal-stream",
+      "warmup": false,
+      "correct": true,
+      "count": 2000,
+      "sequenceErrors": 0,
+      "hash": 1075217352,
+      "openMs": 527.0901250243187,
+      "firstEventMs": 527.1445830464363,
+      "totalMs": 575.4745420217514,
+      "runIndex": 4
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "normal-stream",
+      "warmup": false,
+      "correct": true,
+      "count": 2000,
+      "sequenceErrors": 0,
+      "hash": 1075217352,
+      "openMs": 11.569000005722046,
+      "firstEventMs": 11.573749959468842,
+      "totalMs": 48.62799996137619,
+      "runIndex": 5
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "normal-stream",
+      "warmup": false,
+      "correct": true,
+      "count": 2000,
+      "sequenceErrors": 0,
+      "hash": 1075217352,
+      "openMs": 509.1737080216408,
+      "firstEventMs": 509.19841599464417,
+      "totalMs": 544.5982080101967,
+      "runIndex": 5
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "normal-stream",
+      "warmup": false,
+      "correct": true,
+      "count": 2000,
+      "sequenceErrors": 0,
+      "hash": 1075217352,
+      "openMs": 27.818749964237213,
+      "firstEventMs": 27.850291967391968,
+      "totalMs": 71.99991697072983,
+      "runIndex": 5
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "large-events",
+      "warmup": true,
+      "correct": true,
+      "count": 64,
+      "sequenceErrors": 0,
+      "hash": 244042655,
+      "openMs": 563.1610000133514,
+      "firstEventMs": 564.3375000357628,
+      "totalMs": 819.1485830545425,
+      "runIndex": 0
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "large-events",
+      "warmup": true,
+      "correct": true,
+      "count": 64,
+      "sequenceErrors": 0,
+      "hash": 244042655,
+      "openMs": 67.85883301496506,
+      "firstEventMs": 68.55704098939896,
+      "totalMs": 320.9669160246849,
+      "runIndex": 0
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "large-events",
+      "warmup": true,
+      "correct": true,
+      "count": 64,
+      "sequenceErrors": 0,
+      "hash": 244042655,
+      "openMs": 42.88445895910263,
+      "firstEventMs": 43.506334006786346,
+      "totalMs": 271.2662090063095,
+      "runIndex": 0
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "large-events",
+      "warmup": false,
+      "correct": true,
+      "count": 64,
+      "sequenceErrors": 0,
+      "hash": 244042655,
+      "openMs": 62.73333299160004,
+      "firstEventMs": 63.96679198741913,
+      "totalMs": 318.54583299160004,
+      "runIndex": 1
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "large-events",
+      "warmup": false,
+      "correct": true,
+      "count": 64,
+      "sequenceErrors": 0,
+      "hash": 244042655,
+      "openMs": 47.43841600418091,
+      "firstEventMs": 47.77295798063278,
+      "totalMs": 278.12283301353455,
+      "runIndex": 1
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "large-events",
+      "warmup": false,
+      "correct": true,
+      "count": 64,
+      "sequenceErrors": 0,
+      "hash": 244042655,
+      "openMs": 533.3980839848518,
+      "firstEventMs": 534.5977500081062,
+      "totalMs": 782.8694999814034,
+      "runIndex": 1
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "large-events",
+      "warmup": false,
+      "correct": true,
+      "count": 64,
+      "sequenceErrors": 0,
+      "hash": 244042655,
+      "openMs": 41.02387499809265,
+      "firstEventMs": 41.84745901823044,
+      "totalMs": 272.0848340392113,
+      "runIndex": 2
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "large-events",
+      "warmup": false,
+      "correct": true,
+      "count": 64,
+      "sequenceErrors": 0,
+      "hash": 244042655,
+      "openMs": 545.7788749933243,
+      "firstEventMs": 546.5629159808159,
+      "totalMs": 787.175165951252,
+      "runIndex": 2
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "large-events",
+      "warmup": false,
+      "correct": true,
+      "count": 64,
+      "sequenceErrors": 0,
+      "hash": 244042655,
+      "openMs": 61.015917003154755,
+      "firstEventMs": 61.93637502193451,
+      "totalMs": 313.8551250100136,
+      "runIndex": 2
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "large-events",
+      "warmup": false,
+      "correct": true,
+      "count": 64,
+      "sequenceErrors": 0,
+      "hash": 244042655,
+      "openMs": 560.6201249957085,
+      "firstEventMs": 563.6972090005875,
+      "totalMs": 820.254292011261,
+      "runIndex": 3
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "large-events",
+      "warmup": false,
+      "correct": true,
+      "count": 64,
+      "sequenceErrors": 0,
+      "hash": 244042655,
+      "openMs": 60.453000009059906,
+      "firstEventMs": 61.52295804023743,
+      "totalMs": 308.3295000195503,
+      "runIndex": 3
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "large-events",
+      "warmup": false,
+      "correct": true,
+      "count": 64,
+      "sequenceErrors": 0,
+      "hash": 244042655,
+      "openMs": 45.37854200601578,
+      "firstEventMs": 45.79558300971985,
+      "totalMs": 269.7115830183029,
+      "runIndex": 3
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "high-throughput",
+      "warmup": true,
+      "correct": true,
+      "count": 20000,
+      "sequenceErrors": 0,
+      "hash": 3325099728,
+      "openMs": 541.3870829939842,
+      "firstEventMs": 541.600790977478,
+      "totalMs": 698.354582965374,
+      "runIndex": 0
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "high-throughput",
+      "warmup": true,
+      "correct": true,
+      "count": 20000,
+      "sequenceErrors": 0,
+      "hash": 3325099728,
+      "openMs": 38.48466598987579,
+      "firstEventMs": 38.609833002090454,
+      "totalMs": 179.27462500333786,
+      "runIndex": 0
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "high-throughput",
+      "warmup": true,
+      "correct": true,
+      "count": 20000,
+      "sequenceErrors": 0,
+      "hash": 3325099728,
+      "openMs": 23.15512502193451,
+      "firstEventMs": 23.15929102897644,
+      "totalMs": 147.06887501478195,
+      "runIndex": 0
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "high-throughput",
+      "warmup": false,
+      "correct": true,
+      "count": 20000,
+      "sequenceErrors": 0,
+      "hash": 3325099728,
+      "openMs": 37.76783400774002,
+      "firstEventMs": 37.888709008693695,
+      "totalMs": 177.54441702365875,
+      "runIndex": 1
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "high-throughput",
+      "warmup": false,
+      "correct": true,
+      "count": 20000,
+      "sequenceErrors": 0,
+      "hash": 3325099728,
+      "openMs": 24.427291989326477,
+      "firstEventMs": 24.4307079911232,
+      "totalMs": 148.08950001001358,
+      "runIndex": 1
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "high-throughput",
+      "warmup": false,
+      "correct": true,
+      "count": 20000,
+      "sequenceErrors": 0,
+      "hash": 3325099728,
+      "openMs": 540.1659999489784,
+      "firstEventMs": 540.3884579539299,
+      "totalMs": 694.7891249656677,
+      "runIndex": 1
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "high-throughput",
+      "warmup": false,
+      "correct": true,
+      "count": 20000,
+      "sequenceErrors": 0,
+      "hash": 3325099728,
+      "openMs": 21.461333990097046,
+      "firstEventMs": 21.46579200029373,
+      "totalMs": 146.61175000667572,
+      "runIndex": 2
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "high-throughput",
+      "warmup": false,
+      "correct": true,
+      "count": 20000,
+      "sequenceErrors": 0,
+      "hash": 3325099728,
+      "openMs": 538.5939589738846,
+      "firstEventMs": 538.9459999799728,
+      "totalMs": 690.1857919692993,
+      "runIndex": 2
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "high-throughput",
+      "warmup": false,
+      "correct": true,
+      "count": 20000,
+      "sequenceErrors": 0,
+      "hash": 3325099728,
+      "openMs": 39.03049999475479,
+      "firstEventMs": 39.143625020980835,
+      "totalMs": 181.34512501955032,
+      "runIndex": 2
+    },
+    {
+      "implementation": "baseline-default",
+      "workload": "high-throughput",
+      "warmup": false,
+      "correct": true,
+      "count": 20000,
+      "sequenceErrors": 0,
+      "hash": 3325099728,
+      "openMs": 540.8725830316544,
+      "firstEventMs": 541.0890830159187,
+      "totalMs": 698.1762080192566,
+      "runIndex": 3
+    },
+    {
+      "implementation": "baseline-zero-delay",
+      "workload": "high-throughput",
+      "warmup": false,
+      "correct": true,
+      "count": 20000,
+      "sequenceErrors": 0,
+      "hash": 3325099728,
+      "openMs": 36.8038330078125,
+      "firstEventMs": 36.92766600847244,
+      "totalMs": 177.43395799398422,
+      "runIndex": 3
+    },
+    {
+      "implementation": "candidate-hook",
+      "workload": "high-throughput",
+      "warmup": false,
+      "correct": true,
+      "count": 20000,
+      "sequenceErrors": 0,
+      "hash": 3325099728,
+      "openMs": 22.109667003154755,
+      "firstEventMs": 22.11445903778076,
+      "totalMs": 144.7662090063095,
+      "runIndex": 3
+    }
+  ],
+  "summaries": {
+    "llm-delta:baseline-default": {
+      "sampleCount": 5,
+      "openMs": {
+        "median": 521.72,
+        "p95": 523.95,
+        "min": 521.12,
+        "max": 523.95,
+        "mean": 522.34,
+        "standardDeviation": 1.1
+      },
+      "firstEventMs": {
+        "median": 521.78,
+        "p95": 524.02,
+        "min": 521.17,
+        "max": 524.02,
+        "mean": 522.4,
+        "standardDeviation": 1.11
+      },
+      "totalMs": {
+        "median": 540.04,
+        "p95": 541.98,
+        "min": 535.22,
+        "max": 541.98,
+        "mean": 539.64,
+        "standardDeviation": 2.34
+      }
+    },
+    "llm-delta:baseline-zero-delay": {
+      "sampleCount": 5,
+      "openMs": {
+        "median": 19.51,
+        "p95": 22.77,
+        "min": 17.52,
+        "max": 22.77,
+        "mean": 19.84,
+        "standardDeviation": 1.69
+      },
+      "firstEventMs": {
+        "median": 19.58,
+        "p95": 22.83,
+        "min": 17.56,
+        "max": 22.83,
+        "mean": 19.89,
+        "standardDeviation": 1.7
+      },
+      "totalMs": {
+        "median": 35.08,
+        "p95": 39.27,
+        "min": 29.14,
+        "max": 39.27,
+        "mean": 34.74,
+        "standardDeviation": 3.66
+      }
+    },
+    "llm-delta:candidate-hook": {
+      "sampleCount": 5,
+      "openMs": {
+        "median": 6.53,
+        "p95": 8.16,
+        "min": 2.73,
+        "max": 8.16,
+        "mean": 5.89,
+        "standardDeviation": 2.21
+      },
+      "firstEventMs": {
+        "median": 6.54,
+        "p95": 8.16,
+        "min": 2.73,
+        "max": 8.16,
+        "mean": 5.89,
+        "standardDeviation": 2.21
+      },
+      "totalMs": {
+        "median": 19.76,
+        "p95": 26.13,
+        "min": 17.36,
+        "max": 26.13,
+        "mean": 21.48,
+        "standardDeviation": 3.66
+      }
+    },
+    "tiny-chunks:baseline-default": {
+      "sampleCount": 5,
+      "openMs": {
+        "median": 519.26,
+        "p95": 521.79,
+        "min": 516.14,
+        "max": 521.79,
+        "mean": 518.94,
+        "standardDeviation": 1.84
+      },
+      "firstEventMs": {
+        "median": 519.4,
+        "p95": 521.96,
+        "min": 516.46,
+        "max": 521.96,
+        "mean": 519.17,
+        "standardDeviation": 1.8
+      },
+      "totalMs": {
+        "median": 579.03,
+        "p95": 583.2,
+        "min": 572.19,
+        "max": 583.2,
+        "mean": 577.96,
+        "standardDeviation": 4.35
+      }
+    },
+    "tiny-chunks:baseline-zero-delay": {
+      "sampleCount": 5,
+      "openMs": {
+        "median": 18.28,
+        "p95": 19.05,
+        "min": 16.77,
+        "max": 19.05,
+        "mean": 18.18,
+        "standardDeviation": 0.76
+      },
+      "firstEventMs": {
+        "median": 18.44,
+        "p95": 19.15,
+        "min": 16.91,
+        "max": 19.15,
+        "mean": 18.32,
+        "standardDeviation": 0.76
+      },
+      "totalMs": {
+        "median": 74.53,
+        "p95": 76.01,
+        "min": 69.35,
+        "max": 76.01,
+        "mean": 73.8,
+        "standardDeviation": 2.32
+      }
+    },
+    "tiny-chunks:candidate-hook": {
+      "sampleCount": 5,
+      "openMs": {
+        "median": 3.15,
+        "p95": 3.49,
+        "min": 2.23,
+        "max": 3.49,
+        "mean": 3.03,
+        "standardDeviation": 0.43
+      },
+      "firstEventMs": {
+        "median": 3.55,
+        "p95": 3.8,
+        "min": 2.56,
+        "max": 3.8,
+        "mean": 3.35,
+        "standardDeviation": 0.43
+      },
+      "totalMs": {
+        "median": 56.63,
+        "p95": 58.28,
+        "min": 55.55,
+        "max": 58.28,
+        "mean": 56.92,
+        "standardDeviation": 0.98
+      }
+    },
+    "normal-stream:baseline-default": {
+      "sampleCount": 5,
+      "openMs": {
+        "median": 523.98,
+        "p95": 527.09,
+        "min": 509.17,
+        "max": 527.09,
+        "mean": 521.86,
+        "standardDeviation": 6.45
+      },
+      "firstEventMs": {
+        "median": 524.03,
+        "p95": 527.14,
+        "min": 509.2,
+        "max": 527.14,
+        "mean": 521.9,
+        "standardDeviation": 6.46
+      },
+      "totalMs": {
+        "median": 574.45,
+        "p95": 575.51,
+        "min": 544.6,
+        "max": 575.51,
+        "mean": 568.78,
+        "standardDeviation": 12.11
+      }
+    },
+    "normal-stream:baseline-zero-delay": {
+      "sampleCount": 5,
+      "openMs": {
+        "median": 23.46,
+        "p95": 27.82,
+        "min": 21.31,
+        "max": 27.82,
+        "mean": 23.75,
+        "standardDeviation": 2.21
+      },
+      "firstEventMs": {
+        "median": 23.49,
+        "p95": 27.85,
+        "min": 21.35,
+        "max": 27.85,
+        "mean": 23.79,
+        "standardDeviation": 2.21
+      },
+      "totalMs": {
+        "median": 70.87,
+        "p95": 72,
+        "min": 67.93,
+        "max": 72,
+        "mean": 70.59,
+        "standardDeviation": 1.48
+      }
+    },
+    "normal-stream:candidate-hook": {
+      "sampleCount": 5,
+      "openMs": {
+        "median": 8.96,
+        "p95": 12.86,
+        "min": 7.91,
+        "max": 12.86,
+        "mean": 9.9,
+        "standardDeviation": 1.97
+      },
+      "firstEventMs": {
+        "median": 8.97,
+        "p95": 12.87,
+        "min": 7.92,
+        "max": 12.87,
+        "mean": 9.9,
+        "standardDeviation": 1.97
+      },
+      "totalMs": {
+        "median": 47.69,
+        "p95": 51.22,
+        "min": 46.21,
+        "max": 51.22,
+        "mean": 48.11,
+        "standardDeviation": 1.76
+      }
+    },
+    "large-events:baseline-default": {
+      "sampleCount": 3,
+      "openMs": {
+        "median": 545.78,
+        "p95": 560.62,
+        "min": 533.4,
+        "max": 560.62,
+        "mean": 546.6,
+        "standardDeviation": 11.13
+      },
+      "firstEventMs": {
+        "median": 546.56,
+        "p95": 563.7,
+        "min": 534.6,
+        "max": 563.7,
+        "mean": 548.29,
+        "standardDeviation": 11.94
+      },
+      "totalMs": {
+        "median": 787.18,
+        "p95": 820.25,
+        "min": 782.87,
+        "max": 820.25,
+        "mean": 796.77,
+        "standardDeviation": 16.7
+      }
+    },
+    "large-events:baseline-zero-delay": {
+      "sampleCount": 3,
+      "openMs": {
+        "median": 61.02,
+        "p95": 62.73,
+        "min": 60.45,
+        "max": 62.73,
+        "mean": 61.4,
+        "standardDeviation": 0.97
+      },
+      "firstEventMs": {
+        "median": 61.94,
+        "p95": 63.97,
+        "min": 61.52,
+        "max": 63.97,
+        "mean": 62.48,
+        "standardDeviation": 1.07
+      },
+      "totalMs": {
+        "median": 313.86,
+        "p95": 318.55,
+        "min": 308.33,
+        "max": 318.55,
+        "mean": 313.58,
+        "standardDeviation": 4.18
+      }
+    },
+    "large-events:candidate-hook": {
+      "sampleCount": 3,
+      "openMs": {
+        "median": 45.38,
+        "p95": 47.44,
+        "min": 41.02,
+        "max": 47.44,
+        "mean": 44.61,
+        "standardDeviation": 2.67
+      },
+      "firstEventMs": {
+        "median": 45.8,
+        "p95": 47.77,
+        "min": 41.85,
+        "max": 47.77,
+        "mean": 45.14,
+        "standardDeviation": 2.46
+      },
+      "totalMs": {
+        "median": 272.08,
+        "p95": 278.12,
+        "min": 269.71,
+        "max": 278.12,
+        "mean": 273.31,
+        "standardDeviation": 3.54
+      }
+    },
+    "high-throughput:baseline-default": {
+      "sampleCount": 3,
+      "openMs": {
+        "median": 540.17,
+        "p95": 540.87,
+        "min": 538.59,
+        "max": 540.87,
+        "mean": 539.88,
+        "standardDeviation": 0.95
+      },
+      "firstEventMs": {
+        "median": 540.39,
+        "p95": 541.09,
+        "min": 538.95,
+        "max": 541.09,
+        "mean": 540.14,
+        "standardDeviation": 0.89
+      },
+      "totalMs": {
+        "median": 694.79,
+        "p95": 698.18,
+        "min": 690.19,
+        "max": 698.18,
+        "mean": 694.38,
+        "standardDeviation": 3.27
+      }
+    },
+    "high-throughput:baseline-zero-delay": {
+      "sampleCount": 3,
+      "openMs": {
+        "median": 37.77,
+        "p95": 39.03,
+        "min": 36.8,
+        "max": 39.03,
+        "mean": 37.87,
+        "standardDeviation": 0.91
+      },
+      "firstEventMs": {
+        "median": 37.89,
+        "p95": 39.14,
+        "min": 36.93,
+        "max": 39.14,
+        "mean": 37.99,
+        "standardDeviation": 0.91
+      },
+      "totalMs": {
+        "median": 177.54,
+        "p95": 181.35,
+        "min": 177.43,
+        "max": 181.35,
+        "mean": 178.77,
+        "standardDeviation": 1.82
+      }
+    },
+    "high-throughput:candidate-hook": {
+      "sampleCount": 3,
+      "openMs": {
+        "median": 22.11,
+        "p95": 24.43,
+        "min": 21.46,
+        "max": 24.43,
+        "mean": 22.67,
+        "standardDeviation": 1.27
+      },
+      "firstEventMs": {
+        "median": 22.11,
+        "p95": 24.43,
+        "min": 21.47,
+        "max": 24.43,
+        "mean": 22.67,
+        "standardDeviation": 1.27
+      },
+      "totalMs": {
+        "median": 146.61,
+        "p95": 148.09,
+        "min": 144.77,
+        "max": 148.09,
+        "mean": 146.49,
+        "standardDeviation": 1.36
+      }
+    }
+  },
+  "correctness": {
+    "allRunsCorrect": true,
+    "hashesMatchByWorkload": {
+      "llm-delta": true,
+      "tiny-chunks": true,
+      "normal-stream": true,
+      "large-events": true,
+      "high-throughput": true
+    }
+  }
+}
