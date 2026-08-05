@@ -79,6 +79,11 @@ function useCommittedCallbacks<EventName extends string>(
 /**
  * 一个 Effect 完整拥有一个 transport 和一个可选的 AppState listener；cleanup 同步退休二者，
  * 因而 StrictMode replay、配置变化和卸载都遵循同一条资源路径。
+ *
+ * @typeParam EventName - 服务端自定义事件名的联合类型。
+ * @param url - SSE 请求地址；URL、method 或 body 改变时会开始新的恢复范围。
+ * @param options - 请求参数、连接策略和业务回调。
+ * @returns 当前状态、最近错误以及稳定的打开、关闭和重连命令。
  */
 export function useEventSource<EventName extends string = string>(
   url: string,
