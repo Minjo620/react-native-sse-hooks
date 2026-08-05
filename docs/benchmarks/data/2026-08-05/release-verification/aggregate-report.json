@@ -1,0 +1,675 @@
+{
+  "schemaVersion": 1,
+  "createdAt": "2026-08-05T08:03:11.429Z",
+  "sourceFiles": [
+    "suite-1.json",
+    "suite-2.json",
+    "suite-3.json"
+  ],
+  "suiteCount": 3,
+  "totalConnections": 234,
+  "measuredConnections": 189,
+  "environment": {
+    "platform": "ios",
+    "platformVersion": "26.5",
+    "deviceName": "Simulator iOS",
+    "isDevice": false,
+    "expoSdk": "57.0.0",
+    "reactNative": {
+      "major": 0,
+      "minor": 86,
+      "patch": 2
+    },
+    "developmentBundle": false
+  },
+  "correctness": {
+    "allSuitesCorrect": true,
+    "allHashesMatch": true
+  },
+  "workloads": [
+    {
+      "name": "llm-delta",
+      "eventCount": 500,
+      "payloadSize": 24,
+      "variablePayload": true,
+      "chunkSize": 128
+    },
+    {
+      "name": "tiny-chunks",
+      "eventCount": 200,
+      "payloadSize": 32,
+      "variablePayload": false,
+      "chunkSize": 8
+    },
+    {
+      "name": "normal-stream",
+      "eventCount": 2000,
+      "payloadSize": 64,
+      "variablePayload": true,
+      "chunkSize": 256
+    },
+    {
+      "name": "large-events",
+      "eventCount": 64,
+      "payloadSize": 65536,
+      "variablePayload": false,
+      "chunkSize": 4096
+    },
+    {
+      "name": "high-throughput",
+      "eventCount": 20000,
+      "payloadSize": 48,
+      "variablePayload": false,
+      "chunkSize": 16384
+    }
+  ],
+  "summaries": {
+    "llm-delta:baseline-default": {
+      "sampleCount": 15,
+      "openMs": {
+        "median": 522.05,
+        "p95": 525.35,
+        "min": 519.14,
+        "max": 525.35,
+        "mean": 522.34
+      },
+      "firstEventMs": {
+        "median": 522.13,
+        "p95": 525.41,
+        "min": 519.16,
+        "max": 525.41,
+        "mean": 522.41
+      },
+      "totalMs": {
+        "median": 540.2,
+        "p95": 545.05,
+        "min": 533.97,
+        "max": 545.05,
+        "mean": 540.53
+      },
+      "processingMs": {
+        "median": 17.89,
+        "p95": 22.82,
+        "min": 14.81,
+        "max": 22.82,
+        "mean": 18.12
+      },
+      "eventsPerSecond": {
+        "median": 27950.85,
+        "p95": 33763.35,
+        "min": 21915.13,
+        "max": 33763.35,
+        "mean": 27803.95
+      }
+    },
+    "llm-delta:baseline-zero-delay": {
+      "sampleCount": 15,
+      "openMs": {
+        "median": 23.24,
+        "p95": 24.63,
+        "min": 18.85,
+        "max": 24.63,
+        "mean": 22.43
+      },
+      "firstEventMs": {
+        "median": 23.31,
+        "p95": 24.7,
+        "min": 18.87,
+        "max": 24.7,
+        "mean": 22.49
+      },
+      "totalMs": {
+        "median": 40.04,
+        "p95": 42.64,
+        "min": 32.42,
+        "max": 42.64,
+        "mean": 39.12
+      },
+      "processingMs": {
+        "median": 17.13,
+        "p95": 18.87,
+        "min": 13.28,
+        "max": 18.87,
+        "mean": 16.64
+      },
+      "eventsPerSecond": {
+        "median": 29183.73,
+        "p95": 37663.01,
+        "min": 26491.24,
+        "max": 37663.01,
+        "mean": 30410.37
+      }
+    },
+    "llm-delta:candidate-hook": {
+      "sampleCount": 15,
+      "openMs": {
+        "median": 8.37,
+        "p95": 11.06,
+        "min": 4.19,
+        "max": 11.06,
+        "mean": 8.32
+      },
+      "firstEventMs": {
+        "median": 8.38,
+        "p95": 11.07,
+        "min": 4.19,
+        "max": 11.07,
+        "mean": 8.33
+      },
+      "totalMs": {
+        "median": 25.34,
+        "p95": 30.32,
+        "min": 16.88,
+        "max": 30.32,
+        "mean": 24.44
+      },
+      "processingMs": {
+        "median": 16,
+        "p95": 20.91,
+        "min": 12.69,
+        "max": 20.91,
+        "mean": 16.11
+      },
+      "eventsPerSecond": {
+        "median": 31240.81,
+        "p95": 39412.1,
+        "min": 23914.72,
+        "max": 39412.1,
+        "mean": 31625.53
+      }
+    },
+    "tiny-chunks:baseline-default": {
+      "sampleCount": 15,
+      "openMs": {
+        "median": 521.26,
+        "p95": 522.43,
+        "min": 518.07,
+        "max": 522.43,
+        "mean": 520.62
+      },
+      "firstEventMs": {
+        "median": 521.41,
+        "p95": 522.49,
+        "min": 518.4,
+        "max": 522.49,
+        "mean": 520.82
+      },
+      "totalMs": {
+        "median": 584.16,
+        "p95": 587.69,
+        "min": 569.92,
+        "max": 587.69,
+        "mean": 582.44
+      },
+      "processingMs": {
+        "median": 62.57,
+        "p95": 65.77,
+        "min": 51.51,
+        "max": 65.77,
+        "mean": 61.62
+      },
+      "eventsPerSecond": {
+        "median": 3196.22,
+        "p95": 3882.43,
+        "min": 3041.09,
+        "max": 3882.43,
+        "mean": 3260.05
+      }
+    },
+    "tiny-chunks:baseline-zero-delay": {
+      "sampleCount": 15,
+      "openMs": {
+        "median": 18.43,
+        "p95": 19.26,
+        "min": 17.35,
+        "max": 19.26,
+        "mean": 18.4
+      },
+      "firstEventMs": {
+        "median": 18.55,
+        "p95": 19.63,
+        "min": 17.45,
+        "max": 19.63,
+        "mean": 18.62
+      },
+      "totalMs": {
+        "median": 72.5,
+        "p95": 80.14,
+        "min": 68.21,
+        "max": 80.14,
+        "mean": 73.35
+      },
+      "processingMs": {
+        "median": 54.47,
+        "p95": 61.59,
+        "min": 49.86,
+        "max": 61.59,
+        "mean": 54.74
+      },
+      "eventsPerSecond": {
+        "median": 3672.06,
+        "p95": 4011.42,
+        "min": 3247.1,
+        "max": 4011.42,
+        "mean": 3667.03
+      }
+    },
+    "tiny-chunks:candidate-hook": {
+      "sampleCount": 15,
+      "openMs": {
+        "median": 3.09,
+        "p95": 4.25,
+        "min": 1.96,
+        "max": 4.25,
+        "mean": 3.16
+      },
+      "firstEventMs": {
+        "median": 3.42,
+        "p95": 4.33,
+        "min": 2.06,
+        "max": 4.33,
+        "mean": 3.33
+      },
+      "totalMs": {
+        "median": 55.87,
+        "p95": 80.39,
+        "min": 49.64,
+        "max": 80.39,
+        "mean": 56.21
+      },
+      "processingMs": {
+        "median": 52.9,
+        "p95": 76.97,
+        "min": 46.57,
+        "max": 76.97,
+        "mean": 52.88
+      },
+      "eventsPerSecond": {
+        "median": 3780.59,
+        "p95": 4294.74,
+        "min": 2598.27,
+        "max": 4294.74,
+        "mean": 3837.51
+      }
+    },
+    "normal-stream:baseline-default": {
+      "sampleCount": 15,
+      "openMs": {
+        "median": 527.63,
+        "p95": 531.19,
+        "min": 511.12,
+        "max": 531.19,
+        "mean": 526.94
+      },
+      "firstEventMs": {
+        "median": 527.69,
+        "p95": 531.27,
+        "min": 511.17,
+        "max": 531.27,
+        "mean": 527.01
+      },
+      "totalMs": {
+        "median": 578.66,
+        "p95": 581.86,
+        "min": 553.89,
+        "max": 581.86,
+        "mean": 576.62
+      },
+      "processingMs": {
+        "median": 50.42,
+        "p95": 51.04,
+        "min": 42.72,
+        "max": 51.04,
+        "mean": 49.61
+      },
+      "eventsPerSecond": {
+        "median": 39667.45,
+        "p95": 46821.27,
+        "min": 39187.32,
+        "max": 46821.27,
+        "mean": 40385.97
+      }
+    },
+    "normal-stream:baseline-zero-delay": {
+      "sampleCount": 15,
+      "openMs": {
+        "median": 24.66,
+        "p95": 27.46,
+        "min": 19.66,
+        "max": 27.46,
+        "mean": 24.03
+      },
+      "firstEventMs": {
+        "median": 24.7,
+        "p95": 27.5,
+        "min": 19.69,
+        "max": 27.5,
+        "mean": 24.07
+      },
+      "totalMs": {
+        "median": 70.64,
+        "p95": 73.56,
+        "min": 53.31,
+        "max": 73.56,
+        "mean": 69.04
+      },
+      "processingMs": {
+        "median": 46.09,
+        "p95": 47.91,
+        "min": 33.62,
+        "max": 47.91,
+        "mean": 44.97
+      },
+      "eventsPerSecond": {
+        "median": 43391.24,
+        "p95": 59485.75,
+        "min": 41742.8,
+        "max": 59485.75,
+        "mean": 44886.95
+      }
+    },
+    "normal-stream:candidate-hook": {
+      "sampleCount": 15,
+      "openMs": {
+        "median": 8.33,
+        "p95": 13.06,
+        "min": 4.08,
+        "max": 13.06,
+        "mean": 9.61
+      },
+      "firstEventMs": {
+        "median": 8.33,
+        "p95": 13.07,
+        "min": 4.08,
+        "max": 13.07,
+        "mean": 9.62
+      },
+      "totalMs": {
+        "median": 48.97,
+        "p95": 51.01,
+        "min": 37.73,
+        "max": 51.01,
+        "mean": 47.19
+      },
+      "processingMs": {
+        "median": 37.99,
+        "p95": 40.64,
+        "min": 33.65,
+        "max": 40.64,
+        "mean": 37.57
+      },
+      "eventsPerSecond": {
+        "median": 52642.6,
+        "p95": 59431.24,
+        "min": 49207.05,
+        "max": 59431.24,
+        "mean": 53352.59
+      }
+    },
+    "large-events:baseline-default": {
+      "sampleCount": 9,
+      "openMs": {
+        "median": 562.41,
+        "p95": 570.91,
+        "min": 545.6,
+        "max": 570.91,
+        "mean": 560.13
+      },
+      "firstEventMs": {
+        "median": 564.44,
+        "p95": 572.26,
+        "min": 547.74,
+        "max": 572.26,
+        "mean": 561.81
+      },
+      "totalMs": {
+        "median": 822.19,
+        "p95": 831.23,
+        "min": 804.9,
+        "max": 831.23,
+        "mean": 820.5
+      },
+      "processingMs": {
+        "median": 257.62,
+        "p95": 263.84,
+        "min": 255.09,
+        "max": 263.84,
+        "mean": 258.69
+      },
+      "eventsPerSecond": {
+        "median": 248.43,
+        "p95": 250.9,
+        "min": 242.57,
+        "max": 250.9,
+        "mean": 247.43
+      }
+    },
+    "large-events:baseline-zero-delay": {
+      "sampleCount": 9,
+      "openMs": {
+        "median": 60.73,
+        "p95": 67.06,
+        "min": 58.89,
+        "max": 67.06,
+        "mean": 61.45
+      },
+      "firstEventMs": {
+        "median": 61.82,
+        "p95": 67.99,
+        "min": 60.09,
+        "max": 67.99,
+        "mean": 62.43
+      },
+      "totalMs": {
+        "median": 315.67,
+        "p95": 325.56,
+        "min": 309.14,
+        "max": 325.56,
+        "mean": 316.57
+      },
+      "processingMs": {
+        "median": 254.08,
+        "p95": 257.58,
+        "min": 249.05,
+        "max": 257.58,
+        "mean": 254.14
+      },
+      "eventsPerSecond": {
+        "median": 251.89,
+        "p95": 256.97,
+        "min": 248.47,
+        "max": 256.97,
+        "mean": 251.85
+      }
+    },
+    "large-events:candidate-hook": {
+      "sampleCount": 9,
+      "openMs": {
+        "median": 45.04,
+        "p95": 46.02,
+        "min": 32.6,
+        "max": 46.02,
+        "mean": 43.55
+      },
+      "firstEventMs": {
+        "median": 45.76,
+        "p95": 46.6,
+        "min": 33.14,
+        "max": 46.6,
+        "mean": 44.14
+      },
+      "totalMs": {
+        "median": 278.44,
+        "p95": 283.78,
+        "min": 263.56,
+        "max": 283.78,
+        "mean": 277.84
+      },
+      "processingMs": {
+        "median": 233.45,
+        "p95": 238.11,
+        "min": 230.29,
+        "max": 238.11,
+        "mean": 233.7
+      },
+      "eventsPerSecond": {
+        "median": 274.15,
+        "p95": 277.91,
+        "min": 268.79,
+        "max": 277.91,
+        "mean": 273.9
+      }
+    },
+    "high-throughput:baseline-default": {
+      "sampleCount": 9,
+      "openMs": {
+        "median": 540.56,
+        "p95": 542.12,
+        "min": 524.68,
+        "max": 542.12,
+        "mean": 538.91
+      },
+      "firstEventMs": {
+        "median": 540.7,
+        "p95": 542.35,
+        "min": 524.84,
+        "max": 542.35,
+        "mean": 539.18
+      },
+      "totalMs": {
+        "median": 697.28,
+        "p95": 700.77,
+        "min": 679.87,
+        "max": 700.77,
+        "mean": 696.07
+      },
+      "processingMs": {
+        "median": 156.11,
+        "p95": 160.12,
+        "min": 155.03,
+        "max": 160.12,
+        "mean": 156.89
+      },
+      "eventsPerSecond": {
+        "median": 128114.11,
+        "p95": 129009.51,
+        "min": 124904.47,
+        "max": 129009.51,
+        "mean": 127496.2
+      }
+    },
+    "high-throughput:baseline-zero-delay": {
+      "sampleCount": 9,
+      "openMs": {
+        "median": 37.9,
+        "p95": 40.62,
+        "min": 36.28,
+        "max": 40.62,
+        "mean": 38.32
+      },
+      "firstEventMs": {
+        "median": 38,
+        "p95": 40.74,
+        "min": 36.58,
+        "max": 40.74,
+        "mean": 38.47
+      },
+      "totalMs": {
+        "median": 186.1,
+        "p95": 190.88,
+        "min": 184.38,
+        "max": 190.88,
+        "mean": 186.58
+      },
+      "processingMs": {
+        "median": 147.8,
+        "p95": 150.47,
+        "min": 145.81,
+        "max": 150.47,
+        "mean": 148.11
+      },
+      "eventsPerSecond": {
+        "median": 135317.12,
+        "p95": 137165.08,
+        "min": 132912.89,
+        "max": 137165.08,
+        "mean": 135054.84
+      }
+    },
+    "high-throughput:candidate-hook": {
+      "sampleCount": 9,
+      "openMs": {
+        "median": 22.63,
+        "p95": 25.32,
+        "min": 12.2,
+        "max": 25.32,
+        "mean": 21.17
+      },
+      "firstEventMs": {
+        "median": 22.64,
+        "p95": 25.32,
+        "min": 12.21,
+        "max": 25.32,
+        "mean": 21.17
+      },
+      "totalMs": {
+        "median": 149.89,
+        "p95": 153.62,
+        "min": 127.47,
+        "max": 153.62,
+        "mean": 146.7
+      },
+      "processingMs": {
+        "median": 126.15,
+        "p95": 130.77,
+        "min": 115.27,
+        "max": 130.77,
+        "mean": 125.53
+      },
+      "eventsPerSecond": {
+        "median": 158536.76,
+        "p95": 173512.02,
+        "min": 152941.5,
+        "max": 173512.02,
+        "mean": 159576.23
+      }
+    }
+  },
+  "comparisons": {
+    "llm-delta": {
+      "openSavedVsDefaultMs": 513.68,
+      "openSavedVsZeroMs": 14.87,
+      "totalImprovementVsZeroPct": 36.71,
+      "processingImprovementVsZeroPct": 6.6,
+      "throughputImprovementVsZeroPct": 7.05
+    },
+    "tiny-chunks": {
+      "openSavedVsDefaultMs": 518.17,
+      "openSavedVsZeroMs": 15.34,
+      "totalImprovementVsZeroPct": 22.94,
+      "processingImprovementVsZeroPct": 2.88,
+      "throughputImprovementVsZeroPct": 2.96
+    },
+    "normal-stream": {
+      "openSavedVsDefaultMs": 519.3,
+      "openSavedVsZeroMs": 16.33,
+      "totalImprovementVsZeroPct": 30.68,
+      "processingImprovementVsZeroPct": 17.57,
+      "throughputImprovementVsZeroPct": 21.32
+    },
+    "large-events": {
+      "openSavedVsDefaultMs": 517.37,
+      "openSavedVsZeroMs": 15.69,
+      "totalImprovementVsZeroPct": 11.79,
+      "processingImprovementVsZeroPct": 8.12,
+      "throughputImprovementVsZeroPct": 8.84
+    },
+    "high-throughput": {
+      "openSavedVsDefaultMs": 517.93,
+      "openSavedVsZeroMs": 15.27,
+      "totalImprovementVsZeroPct": 19.46,
+      "processingImprovementVsZeroPct": 14.65,
+      "throughputImprovementVsZeroPct": 17.16
+    }
+  }
+}
