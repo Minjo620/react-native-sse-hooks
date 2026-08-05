@@ -1,0 +1,49 @@
+name: Feature request
+description: Propose a durable user-facing capability or policy.
+title: '[Feature]: '
+labels: [enhancement, triage]
+body:
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Preflight checks
+      options:
+        - label: I searched existing Issues and documentation for this capability.
+          required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Describe the user problem independently of a preferred implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: workaround
+    attributes:
+      label: Current workaround
+      description: Explain how applications handle the problem today.
+    validations:
+      required: true
+  - type: textarea
+    id: api
+    attributes:
+      label: Proposed public API or behavior
+      description: Include a concise usage example when possible.
+    validations:
+      required: true
+  - type: dropdown
+    id: compatibility
+    attributes:
+      label: Compatibility impact
+      options:
+        - Backward compatible
+        - Potentially breaking
+        - Unsure
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+    validations:
+      required: true

@@ -1,5 +1,9 @@
 # Parser benchmark
 
+For the complete method, retained results, and raw evidence, see
+[`docs/benchmarks/README.md`](../docs/benchmarks/README.md) or the
+[Chinese methodology](../docs/benchmarks/README.zh-CN.md).
+
 This benchmark compares the installed, unmodified `react-native-sse@1.2.1` parser with this package's incremental parser.
 
 Both implementations receive the same sequence of cumulative `XMLHttpRequest.responseText` snapshots. The baseline receives each cumulative snapshot as its public implementation does; the candidate extracts only the new suffix before feeding its incremental parser.

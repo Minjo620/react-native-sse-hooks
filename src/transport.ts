@@ -21,14 +21,23 @@ interface TransportOptions<EventName extends string> extends EventSourceRequestO
   onError: (error: EventSourceError) => EventSourceRetryDecision;
 }
 
+/** Hook 内部使用的连接资源控制面；不属于包的公共入口。 */
 export interface Transport {
+  /** 启动连接；`startPaused` 用于 App 初始不在前台的场景。 */
   open: (startPaused?: boolean) => void;
+  /** 退休资源并回到未启用的 `idle` 状态。 */
   deactivate: () => void;
+  /** 退休资源并进入 `closed`，不会触发服务端关闭回调。 */
   close: () => void;
+  /** 退休当前尝试并立即创建新请求。 */
   reconnect: () => void;
+  /** 退休当前 XHR/计时器并保存恢复游标。 */
   pause: () => void;
+  /** 仅在 paused 状态创建新请求。 */
   resume: () => void;
+  /** Effect cleanup 使用的幂等资源释放，不再发布状态。 */
   dispose: () => void;
+  /** 返回最近一次完整消费后提交的事件 ID。 */
   getLastEventId: () => string;
 }
 
@@ -104,7 +113,10 @@ function headersFor(
   return headers;
 }
 
-/** 一次 request 只拥有一个 XHR、一个 parser 和一个累计响应 offset。 */
+/**
+ * 一次 request 只拥有一个 XHR、一个 parser 和一个累计响应 offset。
+ * offset 让累计 `responseText` 只切出新增后缀，避免重复解析已经消费的数据。
+ */
 function createRequest(options: RequestOptions): Request {
   const xhr = new XMLHttpRequest();
   const parser = createParser(options.lastEventId);
@@ -142,6 +154,7 @@ function createRequest(options: RequestOptions): Request {
     if (response.length < offset) {
       throw new Error('XHR responseText shrank during an SSE request.');
     }
+    // React Native LOADING 阶段的 responseText 会累计增长；这里只把新增后缀交给 parser。
     const events = parser.push(response.slice(offset));
     offset = response.length;
     if (xhr.readyState === XMLHttpRequest.DONE) events.push(...parser.finish());
@@ -226,6 +239,7 @@ function createRequest(options: RequestOptions): Request {
     if (failure) throw failure;
   }
 
+  // 所有回调都在 open/send 前安装，建联不需要额外等待来修复监听器顺序。
   xhr.onreadystatechange = handleReadyStateChange;
   xhr.onerror = () => {
     fail({
@@ -275,6 +289,10 @@ function createRequest(options: RequestOptions): Request {
 /**
  * transport 用一个互斥 phase 表达资源所有权，因此任意时刻最多只有一条 XHR 或一个 timer。
  * generation 只负责否决 native 层迟到的旧回调，不参与业务状态表达。
+ *
+ * @param url - 当前逻辑流的固定请求地址。
+ * @param options - 请求参数、初始恢复游标、重试策略和回调。
+ * @returns 由一个 React Effect 独占并在 cleanup 时释放的 transport。
  */
 export function createTransport<EventName extends string = string>(
   url: string,
@@ -370,6 +388,7 @@ export function createTransport<EventName extends string = string>(
       if (event.type === 'retry') {
         retryInterval = validateDelay(event.value, 'SSE retry');
       } else {
+        // 直接从消息提交 ID，避免为每条消息再分配一个 Last-Event-ID 中间事件。
         lastEventId = event.value.id;
         try {
           options.onMessage?.(event.value as EventSourceMessage<EventName>);

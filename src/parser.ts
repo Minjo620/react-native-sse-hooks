@@ -1,17 +1,25 @@
 import type { EventSourceMessage } from './types';
 
+/** parser 产生的消息或服务端重试间隔更新。 */
 export type ParserEvent =
   { type: 'message'; value: EventSourceMessage } | { type: 'retry'; value: number };
 
+/** 一条 SSE 响应流的增量解析器。 */
 export interface SSEParser {
+  /** 消费新增响应片段并返回本次完成的协议事件。 */
   push: (chunk: string) => ParserEvent[];
+  /** 结束当前流；未由空行终止的最后一个事件不会被派发。 */
   finish: () => ParserEvent[];
+  /** 返回最近一个完整 block 已提交的事件 ID。 */
   getLastEventId: () => string;
 }
 
 /**
  * 每个 parser 只拥有一条 XHR 响应的半成品。解析结果作为值返回，使业务回调异常不会
  * 中断 parser、污染剩余 buffer，transport 也不需要额外的消息中转层。
+ *
+ * @param initialLastEventId - 恢复连接时继承的已提交事件 ID。
+ * @returns 只能由单条响应流拥有的增量 parser。
  */
 export function createParser(initialLastEventId = ''): SSEParser {
   let pending = '';
@@ -91,6 +99,7 @@ export function createParser(initialLastEventId = ''): SSEParser {
     pending += chunk;
     const output: ParserEvent[] = [];
     let lineStart = 0;
+    // 热路径使用原生字符串查找并保留 scanFrom，避免小 chunk 到达时反复扫描未完成行。
     let nextCR = pending.indexOf('\r', scanFrom);
     let nextLF = pending.indexOf('\n', scanFrom);
 

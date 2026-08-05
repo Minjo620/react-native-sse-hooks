@@ -1,0 +1,83 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release-pr:
+    name: Prepare release
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
+    outputs:
+      has-changesets: ${{ steps.changesets.outputs.hasChangesets }}
+      pull-request-number: ${{ steps.changesets.outputs.pullRequestNumber }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.18.0
+          package-manager-cache: false
+      - run: npm install --global npm@11.16.0
+      - run: npm ci
+      - run: npm run check
+      - name: Create or update Release PR
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          version: npm run version
+          commit: 'chore: release package'
+          title: 'chore: release package'
+          branch: main
+      - name: Request maintainer review
+        if: steps.changesets.outputs.pullRequestNumber != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ steps.changesets.outputs.pullRequestNumber }}
+        run: >-
+          gh api --method POST
+          "repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}/requested_reviewers"
+          --input - <<< '{"reviewers":["Minjo620"]}'
+      - name: Run required CI on the bot-authored Release PR
+        if: steps.changesets.outputs.pullRequestNumber != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ steps.changesets.outputs.pullRequestNumber }}
+        run: |
+          head_ref="$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${PR_NUMBER}" --jq .head.ref)"
+          gh workflow run ci.yml --ref "$head_ref"
+
+  publish:
+    name: Publish to npm
+    needs: release-pr
+    if: >-
+      needs.release-pr.outputs.has-changesets == 'false' &&
+      vars.NPM_PUBLISH_ENABLED == 'true'
+    runs-on: ubuntu-24.04
+    environment: npm
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24.18.0
+          registry-url: https://registry.npmjs.org
+          package-manager-cache: false
+      - run: npm install --global npm@11.16.0
+      - run: npm ci
+      - name: Publish through npm Trusted Publishing
+        run: npm run release

@@ -21,5 +21,6 @@
     "types": ["node", "vitest/globals"],
     "verbatimModuleSyntax": true
   },
-  "include": ["src", "tests", "benchmarks", "vitest.config.mts"]
+  "include": ["src", "tests", "benchmarks", "vitest.config.mts"],
+  "exclude": ["tests/package-fixtures"]
 }

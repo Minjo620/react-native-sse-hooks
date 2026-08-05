@@ -1,0 +1,59 @@
+name: Performance report
+description: Report a reproducible latency, throughput, memory, or scaling concern.
+title: '[Performance]: '
+labels: [performance, needs-reproduction, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Performance evidence is useful only when output correctness and the measurement environment are recorded. Do not include private request credentials or production user data.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Preflight checks
+      options:
+        - label: Event count, order, and content/hash were verified before timing.
+          required: true
+        - label: I removed credentials, cookies, and personal data.
+          required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Candidate and baseline versions
+      placeholder: react-native-sse-hooks@0.1.0 vs react-native-sse@1.2.1
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      placeholder: Device/simulator, OS, React Native, Expo, Hermes/V8, dev or production bundle
+    validations:
+      required: true
+  - type: textarea
+    id: workload
+    attributes:
+      label: Workload
+      description: Include event count, payload size, chunk size/distribution, connection count, and transport type.
+    validations:
+      required: true
+  - type: textarea
+    id: method
+    attributes:
+      label: Measurement method
+      description: Include warm-up, repetitions, execution order, statistic used, and correctness checks.
+    validations:
+      required: true
+  - type: textarea
+    id: results
+    attributes:
+      label: Raw and summarized results
+      description: Attach raw output or link to a public artifact. Include medians and sample counts.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction project or command
+    validations:
+      required: true

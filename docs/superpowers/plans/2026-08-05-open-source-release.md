@@ -88,6 +88,7 @@ Expected: `main` points at the verified baseline and work continues on `chore/op
 - Create: `.node-version`
 - Modify: `package.json`
 - Modify: `package-lock.json`
+- Modify: `LICENSE`
 - Modify: `.github/workflows/ci.yml`
 
 **Interfaces:**
@@ -123,6 +124,8 @@ Update `package.json` with:
 ```
 
 Do not add a restrictive `engines.node` field: Node is the build/test tool here, while consumers execute the package in React Native. Exact contributor tooling is enforced by the marker files, `packageManager`, and CI.
+
+Update the MIT copyright line to `Copyright (c) 2026 minjo` without adding an email address.
 
 - [ ] **Step 3: Regenerate package-lock metadata with the pinned npm version**
 
@@ -204,6 +207,7 @@ git commit -m "ci: align local and hosted runtimes"
 - Create: `docs/benchmarks/data/2026-08-05/simulator-prod-suite-2.json`
 - Create: `docs/benchmarks/data/2026-08-05/simulator-prod-suite-3.json`
 - Modify: `benchmarks/README.md`
+- Modify: `.prettierignore`
 
 **Interfaces:**
 
@@ -213,6 +217,8 @@ git commit -m "ci: align local and hosted runtimes"
 - [ ] **Step 1: Copy only final retained evidence**
 
 Copy the final Node report, all three retained Round 2 Node suites, retained Round 2 aggregate, and all three retained production simulator suites into the paths above. Do not publish rejected Round 3 data as current results; describe it in prose as a rejected experiment.
+
+Exclude `docs/benchmarks/data/` from Prettier so archived JSON remains byte-for-byte identical to its source evidence.
 
 - [ ] **Step 2: Document the Node/V8 method in both languages**
 
@@ -375,7 +381,7 @@ git commit -m "docs: add bilingual package guide"
 
 - [ ] **Step 2: Adopt the Contributor Covenant without inventing custom conduct rules**
 
-Use Contributor Covenant 2.1 text and its official enforcement contact mechanism via repository maintainer/private reporting, without exposing a personal email.
+Adopt Contributor Covenant 2.1 by authoritative link and apply its complete pledge, standards, scope and enforcement guidelines. Provide GitHub private reporting as the confidential contact method without copying a private email into the repository.
 
 - [ ] **Step 3: Seed the changelog**
 
