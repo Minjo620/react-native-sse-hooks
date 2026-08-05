@@ -47,6 +47,7 @@
     "audit:production": "npm audit --omit=dev --audit-level=low",
     "build": "tsup src/index.ts --format cjs,esm --dts --clean",
     "benchmark": "node --expose-gc --import tsx benchmarks/parser.bench.ts",
+    "benchmark:ci": "BENCHMARK_OUTPUT=benchmark-results/node-v8.json npm run benchmark",
     "check": "npm run format:check && npm run lint && npm run typecheck && npm run test:coverage && npm run audit:production && npm run build && npm run package:check",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
