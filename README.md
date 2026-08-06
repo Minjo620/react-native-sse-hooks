@@ -97,9 +97,9 @@ interface UseEventSourceOptions<EventName extends string = string> {
 ```
 
 - HTTP `200` with `text/event-stream` opens the stream.
-- HTTP `204` closes with `reason: 'no-content'` and stops by default.
+- HTTP `204` closes with `reason: 'no-content'` and stops retrying by default.
 - Network errors, timeouts, HTTP `408`, `429`, and `5xx` retry by default.
-- Other HTTP failures and protocol failures stop by default.
+- Other HTTP failures and protocol failures stop retrying by default.
 - Returning `false` from `onClose`/`onError` stops retrying.
 - Returning a finite non-negative number overrides the next retry delay.
 - A valid server `retry` field updates the default delay for the logical stream.
@@ -110,11 +110,11 @@ interface UseEventSourceOptions<EventName extends string = string> {
 
 [`react-native-sse`](https://github.com/binaryminds/react-native-sse) is an established EventSource-style implementation used as this project's comparison baseline. This package focuses on a Hook-owned lifecycle and a separately testable incremental parser.
 
-One directly observable configuration difference is initial scheduling: `react-native-sse@1.2.1` documents `timeoutBeforeConnection: 500` as its default, while this package installs its callbacks before opening XHR and adds no corresponding wait. This removes an artificial scheduling delay; it does **not** mean the native network handshake itself becomes 500 ms faster.
+The packages have one directly observable difference in initial scheduling. `react-native-sse@1.2.1` documents `timeoutBeforeConnection: 500` as its default. This package installs its callbacks before opening XHR and adds no corresponding wait. This removes an artificial scheduling delay; it does **not** mean the native network handshake itself becomes 500 ms faster.
 
 ## Measured results
 
-Retained Expo/Hermes production-bundle results below compare processing with `react-native-sse@1.2.1` explicitly configured to a 0 ms initial delay.
+The retained Expo/Hermes production-bundle results below compare processing with `react-native-sse@1.2.1` explicitly configured to a 0 ms initial delay.
 
 | Workload        | Processing throughput | End-to-end total time |
 | --------------- | --------------------: | --------------------: |
@@ -124,9 +124,9 @@ Retained Expo/Hermes production-bundle results below compare processing with `re
 | Large events    |                +9.89% |               +12.15% |
 | High throughput |               +14.13% |               +19.21% |
 
-Environment: iPhone 17 Pro simulator, iOS 26.5, Expo SDK 57.0.0, React Native 0.86.2, Hermes, Expo Go, production `--no-dev --minify` bundle. Three suites contained 234 connections and 189 measured connections; all event counts, ordering checks, and hashes passed.
+The test environment used an iPhone 17 Pro simulator, iOS 26.5, Expo SDK 57.0.0, React Native 0.86.2, Hermes, Expo Go, and a production `--no-dev --minify` bundle. The three suites contained 234 connections, including 189 measured connections. All event counts, ordering checks, and hashes passed.
 
-The retained Node 24.18.0/V8 parser microbenchmark improved four workloads, while `normal-stream` measured approximately 1%–2% slower by median (0.154 ms in the fresh retained run). These results are workload- and runtime-specific, not universal performance promises.
+The retained Node 24.18.0/V8 parser microbenchmark improved four workloads. The `normal-stream` workload measured approximately 1%–2% slower by median, a difference of 0.154 ms in the fresh retained run. These results are specific to the recorded workloads and runtimes, not universal performance promises.
 
 Read the [methodology](./docs/benchmarks/README.md), [full results](./docs/benchmarks/2026-08-05-results.md), and [raw evidence](./docs/benchmarks/data/2026-08-05/).
 
@@ -134,7 +134,7 @@ Read the [methodology](./docs/benchmarks/README.md), [full results](./docs/bench
 
 - Parsing follows the relevant event-stream rules in the [WHATWG HTML Living Standard](https://html.spec.whatwg.org/multipage/server-sent-events.html), but this package is not a browser `EventSource` polyfill.
 - Requests use the React Native `XMLHttpRequest` subset and therefore follow platform networking behavior.
-- POST stream replay can be non-idempotent; use manual mode when business coordination is required.
+- POST stream replay can be non-idempotent. Use manual mode when business coordination is required.
 - Simulator and Node benchmarks do not establish physical-device networking, energy, thermal, or large-user-scale behavior.
 
 ## Development
