@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1
+
+### Patch Changes
+
+- 68ba319: Clarify retry behavior and benchmark scope in the English and Simplified Chinese READMEs.
+
 All notable user-visible changes to this project are documented in this file. Version numbers follow [Semantic Versioning](https://semver.org/).
 
 ## 0.1.0 - Unreleased
