@@ -66,9 +66,7 @@ jobs:
   publish:
     name: Publish to npm
     needs: release-pr
-    if: >-
-      needs.release-pr.outputs.has-changesets == 'false' &&
-      vars.NPM_PUBLISH_ENABLED == 'true'
+    if: needs.release-pr.outputs.has-changesets == 'false'
     runs-on: ubuntu-24.04
     environment: npm
     permissions:
