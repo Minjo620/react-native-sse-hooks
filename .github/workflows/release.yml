@@ -27,7 +27,7 @@ jobs:
       has-changesets: ${{ steps.changesets.outputs.hasChangesets }}
       pull-request-number: ${{ steps.changesets.outputs.pullRequestNumber }}
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
           ref: ${{ github.event.workflow_run.head_sha }}
@@ -73,7 +73,7 @@ jobs:
       contents: read
       id-token: write
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           fetch-depth: 0
           ref: ${{ github.event.workflow_run.head_sha }}
