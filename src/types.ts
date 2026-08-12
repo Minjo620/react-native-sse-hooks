@@ -19,10 +19,10 @@ export interface EventSourceMessage<EventName extends string = string> {
 /** 服务端正常结束流的原因。 */
 export type EventSourceCloseReason = 'server-close' | 'no-content';
 
-/** 网络、HTTP、超时或 SSE 协议校验失败的统一错误结构。 */
+/** 请求配置、网络、HTTP、超时或 SSE 协议校验失败的统一错误结构。 */
 export interface EventSourceError {
   /** 稳定的错误类别，便于业务决定是否重试。 */
-  type: 'network-error' | 'http-error' | 'timeout' | 'protocol-error';
+  type: 'configuration-error' | 'network-error' | 'http-error' | 'timeout' | 'protocol-error';
   /** 面向日志和诊断的错误说明。 */
   message: string;
   /** HTTP 错误或原生网络回调可提供的状态码。 */

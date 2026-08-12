@@ -6,6 +6,7 @@ import { dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const repositoryRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const repositoryManifest = JSON.parse(await readFile(join(repositoryRoot, 'package.json'), 'utf8'));
 const fixtureRoot = join(repositoryRoot, 'tests', 'package-fixtures');
 const temporaryPrefix = join(tmpdir(), 'react-native-sse-hooks-package-');
 
@@ -134,7 +135,7 @@ try {
       'utf8',
     ),
   );
-  assert.equal(packedManifest.version, '0.1.0');
+  assert.equal(packedManifest.version, repositoryManifest.version);
 
   console.log(
     `Tarball verified: ${relative(repositoryRoot, tarballPath)} (${packedFiles.length} approved files)`,

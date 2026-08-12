@@ -99,6 +99,7 @@ interface UseEventSourceOptions<EventName extends string = string> {
 - HTTP `200` 且 MIME 为 `text/event-stream` 时打开流。
 - HTTP `204` 以 `reason: 'no-content'` 关闭，默认停止重试。
 - 网络错误、超时、HTTP `408`、`429` 和 `5xx` 默认重试。
+- 请求配置阶段的同步异常默认停止重试。
 - 其他 HTTP 错误和协议错误默认停止重试。
 - `onClose`/`onError` 返回 `false` 可停止重试。
 - 返回有限的非负毫秒数可覆盖下一次重试间隔。

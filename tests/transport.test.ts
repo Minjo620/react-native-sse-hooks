@@ -2,10 +2,13 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { createTransport } from '../src/transport';
 import type { EventSourceCloseEvent, EventSourceError } from '../src/types';
 
+type RequestSetupStep = 'open' | 'setRequestHeader' | 'send';
+
 class FakeXHR {
   static instances: FakeXHR[] = [];
   static LOADING = 3;
   static DONE = 4;
+  static setupFailure: RequestSetupStep | null = null;
 
   readyState = 0;
   status = 0;
@@ -26,11 +29,15 @@ class FakeXHR {
   }
 
   open(...args: unknown[]) {
+    if (FakeXHR.setupFailure === 'open') throw new TypeError('open failed');
     this.openArguments = args;
     this.readyState = 1;
   }
 
   setRequestHeader(name: string, value: string) {
+    if (FakeXHR.setupFailure === 'setRequestHeader') {
+      throw new TypeError('setRequestHeader failed');
+    }
     this.headers[name] = value;
   }
 
@@ -39,6 +46,7 @@ class FakeXHR {
   }
 
   send(body?: Document | XMLHttpRequestBodyInit | null) {
+    if (FakeXHR.setupFailure === 'send') throw new TypeError('send failed');
     this.body = body;
   }
 
@@ -87,6 +95,7 @@ function setup(overrides: Record<string, unknown> = {}) {
 describe('transport contract', () => {
   beforeEach(() => {
     FakeXHR.instances = [];
+    FakeXHR.setupFailure = null;
     vi.useFakeTimers();
     vi.stubGlobal('XMLHttpRequest', FakeXHR);
   });
@@ -205,6 +214,26 @@ describe('transport contract', () => {
     vi.advanceTimersByTime(100);
     expect(FakeXHR.instances).toHaveLength(7);
   });
+
+  it.each(['open', 'setRequestHeader', 'send'] as const)(
+    'does not retry when %s throws synchronously',
+    setupFailure => {
+      FakeXHR.setupFailure = setupFailure;
+      const { source, errors, statuses } = setup();
+
+      source.open();
+
+      expect(errors).toHaveLength(1);
+      expect(errors[0]).toMatchObject({
+        type: 'configuration-error',
+        message: `${setupFailure} failed`,
+      });
+      expect(statuses).not.toContain('waiting');
+      expect(FakeXHR.instances[0]!.aborted).toBe(true);
+      vi.advanceTimersByTime(100);
+      expect(FakeXHR.instances).toHaveLength(1);
+    },
+  );
 
   it('preserves the default close policy when onClose throws', () => {
     const failure = new Error('close callback failed');
