@@ -234,8 +234,8 @@ function createRequest(options: RequestOptions): Request {
     if (failure) throw failure;
   }
 
-  function fail(error: EventSourceError): void {
-    const failure = finish({ type: 'error', error, retry: true });
+  function fail(error: EventSourceError, abort = false): void {
+    const failure = finish({ type: 'error', error, retry: retriesByDefault(error) }, abort);
     if (failure) throw failure;
   }
 
@@ -268,11 +268,14 @@ function createRequest(options: RequestOptions): Request {
       xhr.send(options.body);
     } catch (cause) {
       if (!active) throw asError(cause);
-      fail({
-        type: 'network-error',
-        message: cause instanceof Error ? cause.message : 'Failed to start SSE request.',
-        cause,
-      });
+      fail(
+        {
+          type: 'configuration-error',
+          message: cause instanceof Error ? cause.message : 'Failed to configure SSE request.',
+          cause,
+        },
+        true,
+      );
     }
   }
 

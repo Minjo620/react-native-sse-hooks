@@ -99,6 +99,7 @@ interface UseEventSourceOptions<EventName extends string = string> {
 - HTTP `200` with `text/event-stream` opens the stream.
 - HTTP `204` closes with `reason: 'no-content'` and stops retrying by default.
 - Network errors, timeouts, HTTP `408`, `429`, and `5xx` retry by default.
+- Synchronous request configuration failures stop retrying by default.
 - Other HTTP failures and protocol failures stop retrying by default.
 - Returning `false` from `onClose`/`onError` stops retrying.
 - Returning a finite non-negative number overrides the next retry delay.
