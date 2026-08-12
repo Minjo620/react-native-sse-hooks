@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.2
+
+### Patch Changes
+
+- 7f22905: Stop retrying synchronous request configuration failures by default, retire partially initialized requests, and keep package verification aligned with the current manifest version.
+
 ## 0.1.1
 
 ### Patch Changes

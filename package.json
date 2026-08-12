@@ -1,6 +1,6 @@
 {
   "name": "react-native-sse-hooks",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Resilient, React Native-aware Server-Sent Events hooks.",
   "author": "minjo",
   "license": "MIT",
