@@ -68,4 +68,10 @@ The simulator path includes XHR connection scheduling, cumulative response proce
 4. A Node, Hermes, or simulator result is not generalized to every runtime or device.
 5. Claims such as “faster,” “zero-cost,” or “universally improved” require direct evidence and are otherwise avoided.
 
+## Retention policy
+
+- Keep the methodology, the retained result referenced by the public README, and the raw data needed to audit that result.
+- Replace the retained baseline only after rerunning comparable workloads and documenting the environment and correctness checks.
+- Store routine or scheduled-run output in CI artifacts rather than committing every run. Release assets may hold older evidence when a published release still refers to it.
+
 See [2026-08-05-results.md](./2026-08-05-results.md) for retained results and [`data/2026-08-05/`](./data/2026-08-05/) for raw JSON.

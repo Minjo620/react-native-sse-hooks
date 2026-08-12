@@ -68,4 +68,10 @@ ITERATIONS=20 SCENARIOS=llm-delta,normal-stream npm run benchmark
 4. 不把单次 Node、Hermes 或模拟器结果外推到所有 runtime 和设备。
 5. 未经真实测量，不用“更快”“零开销”或“普遍提升”等绝对表述。
 
+## 留存规则
+
+- 保留测试方法、公开 README 引用的基准结果，以及审计该结果所需的原始数据。
+- 只有在重新运行可比 workload，并记录运行环境与正确性检查后，才替换当前基线。
+- 日常或定时运行结果保存在 CI artifact 中，不为每次运行提交新文件。已发布版本仍需引用旧证据时，可将其保存在 release asset 中。
+
 完整结果见 [2026-08-05-results.md](./2026-08-05-results.md)，原始 JSON 见 [`data/2026-08-05/`](./data/2026-08-05/)。

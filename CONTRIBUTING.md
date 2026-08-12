@@ -29,6 +29,7 @@ Thank you for helping improve `react-native-sse-hooks`. Correctness and reproduc
 - Preserve LF, CR, CRLF, chunk-boundary, Last-Event-ID, retry, stale-attempt, AppState, and cleanup invariants relevant to the change.
 - Report the runtime, workload, samples, correctness checks, and raw output for performance claims.
 - Do not commit credentials, cookies, access tokens, private endpoints, or personal data.
+- Keep implementation plans, agent instructions, and completed task checklists in Issues or pull requests. Add repository documentation only for information that users or future maintainers need after the change lands.
 - Keep changes focused. Unrelated refactors should use a separate Issue and PR.
 
 ## Changesets
@@ -50,3 +51,11 @@ The Changeset summary should describe the effect for package consumers, not the 
 ## Review and release
 
 CI must pass before merge. Merging an ordinary PR updates the accumulated Release PR; it does not immediately publish npm. npm publication begins only after the maintainer reviews and merges the Release PR.
+
+The npm package uses Trusted Publishing. Its publisher must allow `npm publish` and match these values exactly:
+
+- GitHub repository: `Minjo620/react-native-sse-hooks`
+- Workflow filename: `release.yml`
+- GitHub environment: `npm`
+
+The publish job in `.github/workflows/release.yml` must keep `id-token: write`, run on a GitHub-hosted runner, and use a compatible Node/npm pair. Recheck the npm publisher settings after renaming the workflow, moving the repository, or changing the environment.
